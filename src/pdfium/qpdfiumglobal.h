@@ -15,6 +15,17 @@ QT_BEGIN_NAMESPACE
 #    define Q_PDFIUM_EXPORT
 #endif
 
+
+class PdfiumGlobal {
+public:
+    PdfiumGlobal();
+    ~PdfiumGlobal();
+
+private:
+    void initPdfium();
+    void shutdownPdfium();
+};
+
 QT_END_NAMESPACE
 
 #endif // QTPDFIUMGLOBAL
