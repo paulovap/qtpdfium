@@ -66,9 +66,11 @@ void CppTest::test_pageSize()
 
 void CppTest::test_renderPage()
 {
-    QImage image = m_pdfium->page(0).data()->image(3);
-    Q_ASSERT(!image.isNull());
-    image.save(QString(DATA) + "/test.jpg", "jpg", 100);
+    for (int i=0; i<m_pdfium->pageCount(); i++) {
+        QImage image = m_pdfium->page(i).data()->image(3);
+        Q_ASSERT(!image.isNull());
+        image.save(QString(DATA) + QString("/test%1.jpg").arg(i), "jpg", 100);
+    }
 }
 
 
