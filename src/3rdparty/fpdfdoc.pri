@@ -7,23 +7,7 @@ PRIVATE_HEADERS += \
         $$SOURCE_DIR/core/include/fpdfdoc/fpdf_doc.h \
         $$SOURCE_DIR/core/src/fpdfdoc/pdf_vt.h \
         $$SOURCE_DIR/core/src/fpdfdoc/tagged_int.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_action.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_annot.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_ap.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_basic.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_bookmark.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_form.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_formcontrol.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_formfield.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_link.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_metadata.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_ocg.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_tagged.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_utils.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_utils.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_viewerPreferences.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_vt.h \
-        $$SOURCE_DIR/core/src/fpdfdoc/doc_vtmodule.h
+        $$SOURCE_DIR/core/src/fpdfdoc/doc_utils.h
 
 SOURCES += \
         $$SOURCE_DIR/core/src/fpdfdoc/doc_action.cpp \

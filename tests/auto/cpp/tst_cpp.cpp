@@ -1,7 +1,8 @@
 #include <QtTest/QtTest>
 
-#include <qpdfium.h>
-#include <qpdfiumpage.h>
+#include <QtPdfium/QPdfium>
+#include <QtPdfium/QPdfiumPage>
+
 #include <QScopedPointer>
 
 class CppTest: public QObject
@@ -19,12 +20,15 @@ private slots:
     void test_renderPage();
 private:
     QPdfium *m_pdfium;
+    QString m_filename;
 };
 
 
 
 void CppTest::initTestCase()
 {
+    m_filename = QString(DATA) + "/pdf.pdf";
+    qDebug() << m_filename;
 }
 
 void CppTest::cleanupTestCase()
@@ -32,7 +36,7 @@ void CppTest::cleanupTestCase()
 }
 
 void CppTest::init() {
-    m_pdfium  = new QPdfium(QString(DATA) + "/pdf.pdf");
+    m_pdfium  = new QPdfium(m_filename);
 }
 
 void CppTest::cleanup() {
@@ -75,4 +79,5 @@ void CppTest::test_renderPage()
 
 
 QTEST_MAIN(CppTest)
+
 #include "tst_cpp.moc"
