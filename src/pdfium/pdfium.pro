@@ -12,12 +12,14 @@ include($$PWD/../3rdparty/pdfium.pri)
 
 PRIVATE_HEADERS += \
     $$PWD/qpdfiumglobal.h
+
 PUBLIC_HEADERS += \
-    $$PWD/qpdfium.h
+    $$PWD/qpdfium.h \
+    $$PWD/qpdfiumpage.h
 SOURCES += \
     $$PWD/qpdfiumglobal.cpp \
     $$PWD/qpdfium.cpp \
-    qpdfiumpage.cpp
+    $$PWD/qpdfiumpage.cpp
 
-HEADERS += $$PUBLIC_HEADERS $$PRIVATE_HEADERS \
-    qpdfiumpage.h
+HEADERS += $$PUBLIC_HEADERS $$PRIVATE_HEADERS
+
