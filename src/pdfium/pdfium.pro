@@ -1,8 +1,9 @@
 TARGET = QtPdfium
+
+DEFINES += __QT__
+
 QT = core-private core gui
 CONFIG += warn_on strict_flags c++11
-QMAKE_CFLAGS += -Wno-unused-parameter
-QMAKE_CXXFLAGS += -Wno-unused-parameter
 load(qt_module)
 
 #QMAKE_DOCS = $$PWD/doc/qtleveldb.qdocconf

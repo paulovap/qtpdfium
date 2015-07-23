@@ -2,6 +2,8 @@
 #define QPDFIUM_H
 
 #include <QObject>
+#include <QMap>
+#include <QWeakPointer>
 #include "qpdfiumglobal.h"
 
 QT_BEGIN_NAMESPACE
@@ -19,11 +21,12 @@ public:
     bool isValid() const;
     QString filename() const;
     int pageCount() const;
-    QPdfiumPage* page(int i);
+    QWeakPointer<QPdfiumPage> page(int i);
 private:
     Q_DISABLE_COPY(QPdfium)
     void* m_document;
     QString m_filename;
+    QMap<int, QSharedPointer<QPdfiumPage>> m_pages;
 };
 
 QT_END_NAMESPACE

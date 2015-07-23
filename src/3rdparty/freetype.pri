@@ -1,4 +1,4 @@
-DEFINES += __QT__
+
 DEFINES += FT2_BUILD_LIBRARY
 INCLUDEPATH += $$SOURCE_DIR/third_party/freetype/include
 

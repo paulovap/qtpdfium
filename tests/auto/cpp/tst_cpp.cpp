@@ -52,22 +52,21 @@ void CppTest::test_countPages()
 void CppTest::test_getPages()
 {
     for (int i=0;i < m_pdfium->pageCount(); i++){
-        Q_ASSERT(!QScopedPointer<QPdfiumPage>(m_pdfium->page(i)).isNull());
+        Q_ASSERT(!m_pdfium->page(i).isNull());
     }
 }
 
 void CppTest::test_pageSize()
 {
     for (int i=0;i < m_pdfium->pageCount(); i++){
-        QScopedPointer<QPdfiumPage> page(m_pdfium->page(i));
-        QCOMPARE(page.data()->width(), 612.f);
-        QCOMPARE(page.data()->height(), 792.f);
+        QCOMPARE(m_pdfium->page(i).data()->width(), 612.f);
+        QCOMPARE(m_pdfium->page(i).data()->height(), 792.f);
     }
 }
 
 void CppTest::test_renderPage()
 {
-    QImage image = m_pdfium->page(0)->image(3);
+    QImage image = m_pdfium->page(0).data()->image(3);
     Q_ASSERT(!image.isNull());
     image.save(QString(DATA) + "/test.jpg", "jpg", 100);
 }

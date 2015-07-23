@@ -1,4 +1,4 @@
-DEFINES += __QT__
+
 SOURCE_DIR = $$PWD/pdfium
 
 PRIVATE_HEADERS += \

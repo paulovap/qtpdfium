@@ -10,6 +10,7 @@ QPdfium::QPdfium(QString filename, QObject *parent)
     , m_filename(filename)
 {
     m_document = FPDF_LoadDocument(m_filename.toUtf8().constData(), NULL);
+    m_pages.clear();
 }
 
 QPdfium::~QPdfium() {
@@ -35,9 +36,11 @@ int QPdfium::pageCount() const
         return 0;
 }
 
-QPdfiumPage *QPdfium::page(int i)
+QWeakPointer<QPdfiumPage> QPdfium::page(int i)
 {
-    return new QPdfiumPage(FPDF_LoadPage(m_document, i), i, this);
+    if (m_pages[i].isNull())
+        m_pages[i] = QSharedPointer<QPdfiumPage>(new QPdfiumPage(FPDF_LoadPage(m_document, i), i));
+    return m_pages[i].toWeakRef();
 }
 
 QT_END_NAMESPACE
