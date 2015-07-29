@@ -19,7 +19,7 @@ public:
 
     bool isValid() const;
     int index() const;
-    QImage image(int scale = 1);
+    QImage image(qreal scale = 1.0);
 signals:
 
 public slots:

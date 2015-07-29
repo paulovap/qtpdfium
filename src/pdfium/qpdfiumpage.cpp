@@ -24,7 +24,7 @@ bool QPdfiumPage::isValid() const
     return m_page != NULL;
 }
 
-QImage QPdfiumPage::image(int scale)
+QImage QPdfiumPage::image(qreal scale)
 {
     if (!m_page)
         return QImage();
