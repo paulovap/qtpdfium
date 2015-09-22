@@ -17,7 +17,6 @@ PRIVATE_HEADERS += \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_font/font_int.h \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_font/ttgsubtable.h \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_page/pageint.h \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/filters_int.h \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_render/render_int.h
 
 SOURCES += \
@@ -71,8 +70,6 @@ SOURCES += \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/UniJIS-UCS2-HW-V_4.cpp \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/UniJIS-UCS2-H_4.cpp \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/UniJIS-UCS2-V_4.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/UniJIS-UTF16-H_5.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/UniJIS-UTF16-V_5.cpp \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/V_1.cpp \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Korea1/Adobe-Korea1-UCS2_2.cpp \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Korea1/cmaps_korea1.cpp \
@@ -108,7 +105,6 @@ SOURCES += \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/fpdf_parser_document.cpp \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/fpdf_parser_encrypt.cpp \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/fpdf_parser_fdf.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/fpdf_parser_filters.cpp \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/fpdf_parser_objects.cpp \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/fpdf_parser_parser.cpp \
         $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/fpdf_parser_utility.cpp \

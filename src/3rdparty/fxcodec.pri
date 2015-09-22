@@ -20,8 +20,6 @@ PRIVATE_HEADERS += \
         $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_HuffmanTable_Standard.h \
         $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_Image.h \
         $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_List.h \
-        $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_Module.h \
-        $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_Object.h \
         $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_Page.h \
         $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_PatternDict.h \
         $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_Segment.h
@@ -41,7 +39,6 @@ SOURCES += \
         $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_HuffmanDecoder.cpp \
         $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_HuffmanTable.cpp \
         $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_Image.cpp \
-        $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_Object.cpp \
         $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_PatternDict.cpp \
         $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_Segment.cpp \
         $$SOURCE_DIR/core/src/fxcodec/jbig2/JBig2_SymbolDict.cpp

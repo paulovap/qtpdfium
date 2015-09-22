@@ -4,7 +4,7 @@ SOURCE_DIR = $$PWD/pdfium
 PRIVATE_HEADERS += \
         $$SOURCE_DIR/core/src/fxcrt/plex.h \
         $$SOURCE_DIR/core/src/fxcrt/xml_int.h \
-        $$SOURCE_DIR/core/include/fxcrt/fx_arb.h \
+        $$SOURCE_DIR/core/include/fxcrt/fx_bidi.h \
         $$SOURCE_DIR/core/include/fxcrt/fx_basic.h \
         $$SOURCE_DIR/core/include/fxcrt/fx_coordinates.h \
         $$SOURCE_DIR/core/include/fxcrt/fx_ext.h \
@@ -19,18 +19,17 @@ PRIVATE_HEADERS += \
         $$SOURCE_DIR/core/src/fxcrt/fxcrt_platforms.h \
         $$SOURCE_DIR/core/src/fxcrt/fxcrt_posix.h \
         $$SOURCE_DIR/core/src/fxcrt/fxcrt_qt.h \
-        $$SOURCE_DIR/core/src/fxcrt/fxcrt_windows.h \
-        $$SOURCE_DIR/core/src/fxcrt/fx_arabic.h
+        $$SOURCE_DIR/core/src/fxcrt/fxcrt_windows.h
 
 SOURCES += \
         $$SOURCE_DIR/core/src/fxcrt/fxcrt_platforms.cpp \
         $$SOURCE_DIR/core/src/fxcrt/fxcrt_posix.cpp \
         $$SOURCE_DIR/core/src/fxcrt/fxcrt_qt.cpp \
         $$SOURCE_DIR/core/src/fxcrt/fxcrt_windows.cpp \
-        $$SOURCE_DIR/core/src/fxcrt/fx_arabic.cpp \
         $$SOURCE_DIR/core/src/fxcrt/fx_basic_array.cpp \
         $$SOURCE_DIR/core/src/fxcrt/fx_basic_bstring.cpp \
         $$SOURCE_DIR/core/src/fxcrt/fx_basic_buffer.cpp \
+        $$SOURCE_DIR/core/src/fxcrt/fx_bidi.cpp \
         $$SOURCE_DIR/core/src/fxcrt/fx_basic_coords.cpp \
         $$SOURCE_DIR/core/src/fxcrt/fx_basic_gcc.cpp \
         $$SOURCE_DIR/core/src/fxcrt/fx_basic_list.cpp \

@@ -11,6 +11,7 @@ PRIVATE_HEADERS += \
     $$SOURCE_DIR/core/src/fxge/android/fpf_skiafontmgr.h \
     $$SOURCE_DIR/core/src/fxge/android/fpf_skiafont.h \
     $$SOURCE_DIR/core/src/fxge/agg/include/fx_agg_driver.h \
+    $$SOURCE_DIR/core/src/fxge/fontdata/chromefontdata/chromefontdata.h \
     $$SOURCE_DIR/core/include/fxge/fpf.h \
     $$SOURCE_DIR/core/include/fxge/fx_dib.h \
     $$SOURCE_DIR/core/include/fxge/fx_font.h \
