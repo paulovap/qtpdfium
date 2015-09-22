@@ -6,10 +6,6 @@ PRIVATE_HEADERS += \
     $$SOURCE_DIR/core/src/fxge/dib/dib_int.h \
     $$SOURCE_DIR/core/src/fxge/android/fx_fpf.h \
     $$SOURCE_DIR/core/src/fxge/apple/apple_int.h \
-    $$SOURCE_DIR/core/src/fxge/android/fx_android_font.h \
-    $$SOURCE_DIR/core/src/fxge/android/fpf_skiamodule.h \
-    $$SOURCE_DIR/core/src/fxge/android/fpf_skiafontmgr.h \
-    $$SOURCE_DIR/core/src/fxge/android/fpf_skiafont.h \
     $$SOURCE_DIR/core/src/fxge/agg/include/fx_agg_driver.h \
     $$SOURCE_DIR/core/src/fxge/fontdata/chromefontdata/chromefontdata.h \
     $$SOURCE_DIR/core/include/fxge/fpf.h \
@@ -22,14 +18,6 @@ PRIVATE_HEADERS += \
 
 SOURCES += \
     $$SOURCE_DIR/core/src/fxge/agg/src/fx_agg_driver.cpp \
-    $$SOURCE_DIR/core/src/fxge/android/fpf_skiafont.cpp \
-    $$SOURCE_DIR/core/src/fxge/android/fpf_skiafontmgr.cpp \
-    $$SOURCE_DIR/core/src/fxge/android/fpf_skiamodule.cpp \
-    $$SOURCE_DIR/core/src/fxge/android/fx_android_font.cpp \
-    $$SOURCE_DIR/core/src/fxge/android/fx_android_imp.cpp \
-    $$SOURCE_DIR/core/src/fxge/apple/fx_apple_platform.cpp \
-    $$SOURCE_DIR/core/src/fxge/apple/fx_mac_imp.cpp \
-    $$SOURCE_DIR/core/src/fxge/apple/fx_quartz_device.cpp \
     $$SOURCE_DIR/core/src/fxge/dib/fx_dib_composite.cpp \
     $$SOURCE_DIR/core/src/fxge/dib/fx_dib_convert.cpp \
     $$SOURCE_DIR/core/src/fxge/dib/fx_dib_engine.cpp \
@@ -56,7 +44,6 @@ SOURCES += \
     $$SOURCE_DIR/core/src/fxge/ge/fx_ge_device.cpp \
     $$SOURCE_DIR/core/src/fxge/ge/fx_ge_font.cpp \
     $$SOURCE_DIR/core/src/fxge/ge/fx_ge_fontmap.cpp \
-    $$SOURCE_DIR/core/src/fxge/ge/fx_ge_linux.cpp \
     $$SOURCE_DIR/core/src/fxge/ge/fx_ge_qt.cpp \
     $$SOURCE_DIR/core/src/fxge/ge/fx_ge_path.cpp \
     $$SOURCE_DIR/core/src/fxge/ge/fx_ge_ps.cpp \
