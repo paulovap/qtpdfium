@@ -2,6 +2,10 @@ TARGET = QtPdfium
 
 DEFINES += __QT__
 
+# This is to prevent an undefined reference of qt_version_tag
+# when on Linux, x86 architecture and the GNU tools.
+DEFINES += QT_NO_VERSION_TAGGING
+
 QT = core-private core gui
 CONFIG += warn_on strict_flags c++11
 load(qt_module)
