@@ -19,12 +19,14 @@ public:
 
     virtual ~QPdfium();
 
-    bool isValid() const;
-    void setFilename(QString filename);
-    QString filename() const;
-    int pageCount() const;
+    Q_INVOKABLE bool isValid() const;
+    Q_INVOKABLE QString filename() const;
+    Q_INVOKABLE int pageCount() const;
 
     QWeakPointer<QPdfiumPage> page(int i);
+public slots:
+    void setFilename(QString filename);
+
 private:
     Q_DISABLE_COPY(QPdfium)
     void* m_document;
