@@ -4,10 +4,22 @@
 #include <QtPdfium/QPdfiumPage>
 
 #include <QScopedPointer>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
+#include <QStandardPaths>
+
+#ifdef Q_OS_IOS
+    //Since it's static library on IOS we need to initialize it by hand
+    PdfiumGlobal global;
+#endif
 
 class CppTest: public QObject
 {
     Q_OBJECT
+public:
+    CppTest() {
+    }
 private slots:
     void initTestCase();
     void cleanupTestCase();
@@ -21,14 +33,16 @@ private slots:
 private:
     QPdfium *m_pdfium;
     QString m_filename;
+    QTemporaryFile m_file;
 };
 
 
 
 void CppTest::initTestCase()
 {
-    m_filename = QString(DATA) + "/pdf.pdf";
-    qDebug() << m_filename;
+
+     m_filename = QString(DATA) + "/pdf.pdf";
+     qDebug() << m_filename;
 }
 
 void CppTest::cleanupTestCase()
@@ -36,7 +50,7 @@ void CppTest::cleanupTestCase()
 }
 
 void CppTest::init() {
-    m_pdfium  = new QPdfium(m_filename);
+    m_pdfium  = new QPdfium(":/data/pdf.pdf");
 }
 
 void CppTest::cleanup() {
@@ -50,7 +64,7 @@ void CppTest::test_openPdf()
 
 void CppTest::test_countPages()
 {
-    QCOMPARE(m_pdfium->pageCount(), 5);
+    QCOMPARE(m_pdfium->pageCount(), 36);
 }
 
 void CppTest::test_getPages()
@@ -70,10 +84,12 @@ void CppTest::test_pageSize()
 
 void CppTest::test_renderPage()
 {
+    QString temp = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
     for (int i=0; i<m_pdfium->pageCount(); i++) {
         QImage image = m_pdfium->page(i).data()->image(3);
         Q_ASSERT(!image.isNull());
-        image.save(QString(DATA) + QString("/test%1.jpg").arg(i), "jpg", 100);
+        QString saveName(temp + QString("/test%1.jpg").arg(i));
+        Q_ASSERT(image.save(saveName, "jpg", 50));
     }
 }
 

@@ -1,116 +1,251 @@
-
+# module fpdfapi
 SOURCE_DIR = $$PWD/pdfium
 
 PRIVATE_HEADERS += \
-        $$SOURCE_DIR/core/include/fpdfapi/fpdfapi.h \
-        $$SOURCE_DIR/core/include/fpdfapi/fpdf_module.h \
-        $$SOURCE_DIR/core/include/fpdfapi/fpdf_objects.h \
-        $$SOURCE_DIR/core/include/fpdfapi/fpdf_page.h \
-        $$SOURCE_DIR/core/include/fpdfapi/fpdf_pageobj.h \
-        $$SOURCE_DIR/core/include/fpdfapi/fpdf_parser.h \
-        $$SOURCE_DIR/core/include/fpdfapi/fpdf_render.h \
-        $$SOURCE_DIR/core/include/fpdfapi/fpdf_resource.h \
-        $$SOURCE_DIR/core/include/fpdfapi/fpdf_serial.h \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/cmap_int.h \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_edit/editint.h \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_font/common.h \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_font/font_int.h \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_font/ttgsubtable.h \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_page/pageint.h \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_render/render_int.h
+$$SOURCE_DIR/core/fpdfapi/cmaps/cmap_int.h \
+$$SOURCE_DIR/core/fpdfapi/cpdf_modulemgr.h \
+$$SOURCE_DIR/core/fpdfapi/cpdf_pagerendercontext.h \
+$$SOURCE_DIR/core/fpdfapi/edit/cpdf_creator.h \
+$$SOURCE_DIR/core/fpdfapi/edit/cpdf_pagecontentgenerator.h \
+$$SOURCE_DIR/core/fpdfapi/edit/editint.h \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_cidfont.h \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_font.h \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_fontencoding.h \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_simplefont.h \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_truetypefont.h \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_type1font.h \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_type3char.h \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_type3font.h \
+$$SOURCE_DIR/core/fpdfapi/font/font_int.h \
+$$SOURCE_DIR/core/fpdfapi/font/ttgsubtable.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_allstates.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_clippath.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_color.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_colorspace.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_colorstate.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_contentmark.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_contentmarkitem.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_contentparser.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_countedobject.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_docpagedata.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_form.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_formobject.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_generalstate.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_graphicstates.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_image.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_imageobject.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_meshstream.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_page.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_pagemodule.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_pageobject.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_pageobjectholder.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_pageobjectlist.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_path.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_pathobject.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_pattern.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_shadingobject.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_shadingpattern.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_streamcontentparser.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_streamparser.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_textobject.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_textstate.h \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_tilingpattern.h \
+$$SOURCE_DIR/core/fpdfapi/page/pageint.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cfdf_document.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_array.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_boolean.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_crypto_handler.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_data_avail.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_dictionary.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_document.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_hint_tables.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_indirect_object_holder.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_linearized_header.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_name.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_null.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_number.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_object.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_parser.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_reference.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_security_handler.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_simple_parser.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_stream.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_stream_acc.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_string.h \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_syntax_parser.h \
+$$SOURCE_DIR/core/fpdfapi/parser/fpdf_parser_decode.h \
+$$SOURCE_DIR/core/fpdfapi/parser/fpdf_parser_utility.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_charposlist.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_devicebuffer.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_dibtransferfunc.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_docrenderdata.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_imagecacheentry.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_imageloader.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_imagerenderer.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_pagerendercache.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_progressiverenderer.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_rendercontext.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_renderoptions.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_renderstatus.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_scaledrenderbuffer.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_textrenderer.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_transferfunc.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_type3cache.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_type3glyphs.h \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_dibsource.h
 
 SOURCES += \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_basic_module.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/Adobe-CNS1-UCS2_5.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/B5pc-H_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/B5pc-V_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/cmaps_cns1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/CNS-EUC-H_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/CNS-EUC-V_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/ETen-B5-H_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/ETen-B5-V_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/ETenms-B5-H_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/ETenms-B5-V_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/HKscs-B5-H_5.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/HKscs-B5-V_5.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/UniCNS-UCS2-H_3.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/UniCNS-UCS2-V_3.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/CNS1/UniCNS-UTF16-H_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/fpdf_cmaps.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/GB1/Adobe-GB1-UCS2_5.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/GB1/cmaps_gb1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/GB1/GB-EUC-H_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/GB1/GB-EUC-V_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/GB1/GBK-EUC-H_2.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/GB1/GBK-EUC-V_2.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/GB1/GBK2K-H_5.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/GB1/GBK2K-V_5.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/GB1/GBKp-EUC-H_2.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/GB1/GBKp-EUC-V_2.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/GB1/GBpc-EUC-H_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/GB1/GBpc-EUC-V_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/GB1/UniGB-UCS2-H_4.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/GB1/UniGB-UCS2-V_4.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/83pv-RKSJ-H_1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/90ms-RKSJ-H_2.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/90ms-RKSJ-V_2.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/90msp-RKSJ-H_2.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/90msp-RKSJ-V_2.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/90pv-RKSJ-H_1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/Add-RKSJ-H_1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/Add-RKSJ-V_1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/Adobe-Japan1-UCS2_4.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/cmaps_japan1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/EUC-H_1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/EUC-V_1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/Ext-RKSJ-H_2.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/Ext-RKSJ-V_2.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/H_1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/UniJIS-UCS2-HW-H_4.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/UniJIS-UCS2-HW-V_4.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/UniJIS-UCS2-H_4.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/UniJIS-UCS2-V_4.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Japan1/V_1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Korea1/Adobe-Korea1-UCS2_2.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Korea1/cmaps_korea1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Korea1/KSC-EUC-H_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Korea1/KSC-EUC-V_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Korea1/KSCms-UHC-HW-H_1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Korea1/KSCms-UHC-HW-V_1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Korea1/KSCms-UHC-H_1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Korea1/KSCms-UHC-V_1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Korea1/KSCpc-EUC-H_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Korea1/UniKS-UCS2-H_1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Korea1/UniKS-UCS2-V_1.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_cmaps/Korea1/UniKS-UTF16-H_0.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_edit/fpdf_edit_content.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_edit/fpdf_edit_create.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_edit/fpdf_edit_doc.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_edit/fpdf_edit_image.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_font/fpdf_font.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_font/fpdf_font_charset.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_font/fpdf_font_cid.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_font/ttgsubtable.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_page/fpdf_page.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_page/fpdf_page_colors.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_page/fpdf_page_doc.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_page/fpdf_page_func.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_page/fpdf_page_graph_state.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_page/fpdf_page_image.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_page/fpdf_page_parser.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_page/fpdf_page_parser_old.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_page/fpdf_page_path.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_page/fpdf_page_pattern.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/fpdf_parser_decode.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/fpdf_parser_document.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/fpdf_parser_encrypt.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/fpdf_parser_fdf.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/fpdf_parser_objects.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/fpdf_parser_parser.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_parser/fpdf_parser_utility.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_render/fpdf_render.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_render/fpdf_render_cache.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_render/fpdf_render_image.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_render/fpdf_render_loadimage.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_render/fpdf_render_pattern.cpp \
-        $$SOURCE_DIR/core/src/fpdfapi/fpdf_render/fpdf_render_text.cpp
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/Adobe-CNS1-UCS2_5.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/B5pc-H_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/B5pc-V_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/CNS-EUC-H_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/CNS-EUC-V_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/ETen-B5-H_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/ETen-B5-V_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/ETenms-B5-H_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/ETenms-B5-V_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/HKscs-B5-H_5.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/HKscs-B5-V_5.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/UniCNS-UCS2-H_3.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/UniCNS-UCS2-V_3.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/UniCNS-UTF16-H_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/CNS1/cmaps_cns1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/GB1/Adobe-GB1-UCS2_5.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/GB1/GB-EUC-H_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/GB1/GB-EUC-V_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/GB1/GBK-EUC-H_2.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/GB1/GBK-EUC-V_2.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/GB1/GBK2K-H_5.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/GB1/GBK2K-V_5.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/GB1/GBKp-EUC-H_2.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/GB1/GBKp-EUC-V_2.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/GB1/GBpc-EUC-H_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/GB1/GBpc-EUC-V_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/GB1/UniGB-UCS2-H_4.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/GB1/UniGB-UCS2-V_4.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/GB1/cmaps_gb1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/83pv-RKSJ-H_1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/90ms-RKSJ-H_2.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/90ms-RKSJ-V_2.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/90msp-RKSJ-H_2.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/90msp-RKSJ-V_2.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/90pv-RKSJ-H_1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/Add-RKSJ-H_1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/Add-RKSJ-V_1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/Adobe-Japan1-UCS2_4.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/EUC-H_1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/EUC-V_1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/Ext-RKSJ-H_2.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/Ext-RKSJ-V_2.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/H_1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/UniJIS-UCS2-HW-H_4.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/UniJIS-UCS2-HW-V_4.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/UniJIS-UCS2-H_4.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/UniJIS-UCS2-V_4.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/V_1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Japan1/cmaps_japan1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Korea1/Adobe-Korea1-UCS2_2.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Korea1/KSC-EUC-H_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Korea1/KSC-EUC-V_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Korea1/KSCms-UHC-HW-H_1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Korea1/KSCms-UHC-HW-V_1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Korea1/KSCms-UHC-H_1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Korea1/KSCms-UHC-V_1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Korea1/KSCpc-EUC-H_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Korea1/UniKS-UCS2-H_1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Korea1/UniKS-UCS2-V_1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Korea1/UniKS-UTF16-H_0.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/Korea1/cmaps_korea1.cpp \
+$$SOURCE_DIR/core/fpdfapi/cmaps/fpdf_cmaps.cpp \
+$$SOURCE_DIR/core/fpdfapi/cpdf_modulemgr.cpp \
+$$SOURCE_DIR/core/fpdfapi/cpdf_pagerendercontext.cpp \
+$$SOURCE_DIR/core/fpdfapi/edit/cpdf_pagecontentgenerator.cpp \
+$$SOURCE_DIR/core/fpdfapi/edit/fpdf_edit_create.cpp \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_cidfont.cpp \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_font.cpp \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_fontencoding.cpp \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_simplefont.cpp \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_truetypefont.cpp \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_type1font.cpp \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_type3char.cpp \
+$$SOURCE_DIR/core/fpdfapi/font/cpdf_type3font.cpp \
+$$SOURCE_DIR/core/fpdfapi/font/fpdf_font.cpp \
+$$SOURCE_DIR/core/fpdfapi/font/fpdf_font_cid.cpp \
+$$SOURCE_DIR/core/fpdfapi/font/ttgsubtable.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_allstates.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_clippath.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_color.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_colorspace.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_colorstate.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_contentmark.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_contentmarkitem.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_contentparser.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_docpagedata.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_form.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_formobject.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_generalstate.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_graphicstates.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_image.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_imageobject.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_meshstream.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_page.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_pagemodule.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_pageobject.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_pageobjectholder.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_pageobjectlist.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_path.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_pathobject.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_pattern.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_shadingobject.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_shadingpattern.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_streamcontentparser.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_streamparser.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_textobject.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_textstate.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/cpdf_tilingpattern.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/fpdf_page_colors.cpp \
+$$SOURCE_DIR/core/fpdfapi/page/fpdf_page_func.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cfdf_document.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_array.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_boolean.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_crypto_handler.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_data_avail.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_dictionary.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_document.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_hint_tables.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_indirect_object_holder.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_linearized_header.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_name.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_null.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_number.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_object.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_parser.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_reference.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_security_handler.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_simple_parser.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_stream.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_stream_acc.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_string.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/cpdf_syntax_parser.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/fpdf_parser_decode.cpp \
+$$SOURCE_DIR/core/fpdfapi/parser/fpdf_parser_utility.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_charposlist.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_devicebuffer.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_dibtransferfunc.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_docrenderdata.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_imagecacheentry.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_imageloader.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_imagerenderer.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_pagerendercache.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_progressiverenderer.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_rendercontext.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_renderoptions.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_renderstatus.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_scaledrenderbuffer.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_textrenderer.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_transferfunc.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_type3cache.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_type3glyphs.cpp \
+$$SOURCE_DIR/core/fpdfapi/render/cpdf_dibsource.cpp
+
+

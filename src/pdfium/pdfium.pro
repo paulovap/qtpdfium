@@ -1,6 +1,9 @@
 TARGET = QtPdfium
 
-DEFINES += __QT__
+DEFINES += __QT__ \
+    OPJ_STATIC \
+    PNG_PREFIX \
+    PNG_USE_READ_MACROS
 
 # This is to prevent an undefined reference of qt_version_tag
 # when on Linux, x86 architecture and the GNU tools.
