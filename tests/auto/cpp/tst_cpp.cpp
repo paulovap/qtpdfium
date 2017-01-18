@@ -70,15 +70,18 @@ void CppTest::test_countPages()
 void CppTest::test_getPages()
 {
     for (int i=0;i < m_pdfium->pageCount(); i++){
-        Q_ASSERT(!m_pdfium->page(i).isNull());
+        Q_ASSERT(m_pdfium->page(i).isValid());
     }
 }
 
 void CppTest::test_pageSize()
 {
     for (int i=0;i < m_pdfium->pageCount(); i++){
-        QCOMPARE(m_pdfium->page(i).data()->width(), 612.f);
-        QCOMPARE(m_pdfium->page(i).data()->height(), 792.f);
+        QPdfiumPage p1 = m_pdfium->page(i);
+        QPdfiumPage p2 = m_pdfium->page(i);
+        auto p3 = p2;
+        QCOMPARE(p1.width(), 612.f);
+        QCOMPARE(p3.height(), 792.f);
     }
 }
 
@@ -86,7 +89,7 @@ void CppTest::test_renderPage()
 {
     QString temp = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
     for (int i=0; i<m_pdfium->pageCount(); i++) {
-        QImage image = m_pdfium->page(i).data()->image(3);
+        QImage image = m_pdfium->page(i).image(3);
         Q_ASSERT(!image.isNull());
         QString saveName(temp + QString("/test%1.jpg").arg(i));
         Q_ASSERT(image.save(saveName, "jpg", 50));

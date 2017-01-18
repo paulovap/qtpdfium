@@ -4,16 +4,30 @@
 #include <QObject>
 #include <QMap>
 #include <QWeakPointer>
+#include <QSharedPointer>
+#include <QVector>
 #include "qpdfiumglobal.h"
 
 QT_BEGIN_NAMESPACE
 
 class QPdfiumPage;
 
+class CPDF_Document;
+class CPDF_Page;
+
 class Q_PDFIUM_EXPORT QPdfium : public QObject
 {
     Q_OBJECT
 public:
+
+    enum Status {
+        SUCCESS = 0,
+        FILE_ERROR,
+        FORMAT_ERROR,
+        PASSWORD_ERROR,
+        HANDLER_ERROR
+    };
+
     explicit QPdfium(QObject *parent = 0);
     QPdfium(QString filename, QObject *parent = 0);
 
@@ -23,16 +37,18 @@ public:
     Q_INVOKABLE QString filename() const;
     Q_INVOKABLE int pageCount() const;
 
-    QWeakPointer<QPdfiumPage> page(int i);
+    QPdfiumPage page(int i);
 public slots:
-    void setFilename(QString filename);
+    Status loadFile(QString filename);
 
 private:
     Q_DISABLE_COPY(QPdfium)
-    void* m_document;
+
+    QSharedPointer<CPDF_Document> m_document;
+    QVector<QSharedPointer<CPDF_Page>> m_pages;
     QString m_filename;
     int m_pageCount;
-    QMap<int, QSharedPointer<QPdfiumPage>> m_pages;
+    QPdfium::Status parseError(int err);
 };
 
 QT_END_NAMESPACE

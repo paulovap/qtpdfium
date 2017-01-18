@@ -3,16 +3,20 @@
 
 #include <QObject>
 #include <QImage>
+#include <QSharedPointer>
 #include "qpdfiumglobal.h"
+
 
 QT_BEGIN_NAMESPACE
 
 class QPdfium;
+class CPDF_Page;
 
-class Q_PDFIUM_EXPORT QPdfiumPage : public QObject
+class Q_PDFIUM_EXPORT QPdfiumPage
 {
-    Q_OBJECT
 public:
+    QPdfiumPage(const QPdfiumPage &other);
+    QPdfiumPage &operator=(const QPdfiumPage &other);
     ~QPdfiumPage();
     qreal width() const;
     qreal height() const;
@@ -22,15 +26,13 @@ public:
     QImage image(qreal scale = 1.0);
 signals:
 
-public slots:
 private:
-    Q_DISABLE_COPY(QPdfiumPage)
-    explicit QPdfiumPage(void *page, int index, QObject *parent = 0);
+    explicit QPdfiumPage(QSharedPointer<CPDF_Page> page, int index);
+
+    QSharedPointer<CPDF_Page> m_page;
+    int m_index;
 
     friend class QPdfium;
-
-    void* m_page;
-    int m_index;
 };
 
 #endif // QPDFIUMPAGE_H
