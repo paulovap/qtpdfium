@@ -11,15 +11,14 @@ class PdfImageProvider : public QQuickImageProvider
 public:
     QPdfium *m_pdf;
     PdfImageProvider(QPdfium *pdf)
-        : m_pdf(pdf),
-          QQuickImageProvider(QQuickImageProvider::Image)
+        : QQuickImageProvider(QQuickImageProvider::Image),
+          m_pdf(pdf)
     {
     }
 
     QImage requestImage(const QString &id, QSize *size, const QSize &requestedSize) override
     {
         Q_UNUSED(requestedSize);
-
         if (!m_pdf || !m_pdf->isValid()) {
             qDebug() << "Unable to load pdf";
             return QImage();
@@ -27,8 +26,10 @@ public:
 
         int i = id.toInt();
 
-        auto ref = m_pdf->page(i);
-        return ref.data()->image(1);
+        auto page = m_pdf->page(i);
+        size->setWidth(page.width());
+        size->setHeight(page.height());
+        return page.image(1);
     }
 };
 

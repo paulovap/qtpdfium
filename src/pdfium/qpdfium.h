@@ -14,6 +14,7 @@ class QPdfiumPage;
 
 class CPDF_Document;
 class CPDF_Page;
+class PageHolder;
 
 class Q_PDFIUM_EXPORT QPdfium : public QObject
 {
@@ -25,7 +26,8 @@ public:
         FILE_ERROR,
         FORMAT_ERROR,
         PASSWORD_ERROR,
-        HANDLER_ERROR
+        HANDLER_ERROR,
+        FILE_NOT_FOUND_ERROR
     };
 
     explicit QPdfium(QObject *parent = 0);
@@ -45,7 +47,7 @@ private:
     Q_DISABLE_COPY(QPdfium)
 
     QSharedPointer<CPDF_Document> m_document;
-    QVector<QSharedPointer<CPDF_Page>> m_pages;
+    QVector<QWeakPointer<PageHolder>> m_pages;
     QString m_filename;
     int m_pageCount;
     QPdfium::Status parseError(int err);

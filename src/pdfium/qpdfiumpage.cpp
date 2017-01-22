@@ -4,53 +4,62 @@
 
 QT_BEGIN_NAMESPACE
 
-QPdfiumPage::QPdfiumPage(QSharedPointer<CPDF_Page> page, int index)
+PageHolder::PageHolder(CPDF_Page *page)
     : m_page(page)
+{
+}
+
+PageHolder::~PageHolder()
+{
+    if (m_page)
+        FPDF_ClosePage(m_page);
+}
+
+QPdfiumPage::QPdfiumPage(QSharedPointer<PageHolder> page, int index)
+    : m_pageHolder(page)
     , m_index(index)
 {
 }
 
 QPdfiumPage::QPdfiumPage(const QPdfiumPage &other)
-    : m_page(other.m_page)
+    : m_pageHolder(other.m_pageHolder)
     , m_index(other.m_index)
 {
 }
 
 QPdfiumPage &QPdfiumPage::operator=(const QPdfiumPage &other)
 {
-    m_page = other.m_page;
+    m_pageHolder = other.m_pageHolder;
     m_index = other.m_index;
     return *this;
 }
 
 QPdfiumPage::~QPdfiumPage()
 {
-    if (m_page)
-        m_page.clear();
 }
 
 qreal QPdfiumPage::width() const
 {
-    if (!m_page)
+    if (!m_pageHolder)
         return -1;
-    return m_page->GetPageWidth();
+    return m_pageHolder.data()->m_page->GetPageWidth();
 }
 
 qreal QPdfiumPage::height() const
 {
-    if (!m_page)
+    if (!m_pageHolder)
         return -1;
-    return m_page->GetPageHeight();
+    return m_pageHolder.data()->m_page->GetPageHeight();
 }
 
 bool QPdfiumPage::isValid() const
 {
-    return !m_page.isNull();
+    return !m_pageHolder.isNull();
 }
 
 QImage QPdfiumPage::image(qreal scale)
 {
-    if (!m_page)
+    if (!isValid())
         return QImage();
 
     QImage image(width()*scale, height()*scale, QImage::Format_RGBA8888);
@@ -67,7 +76,7 @@ QImage QPdfiumPage::image(qreal scale)
         return QImage();
     }
 
-    FPDF_RenderPageBitmap(bitmap, m_page.data(),
+    FPDF_RenderPageBitmap(bitmap, m_pageHolder.data()->m_page,
                           0, 0, image.width(), image.height(),
                           0, 0); // no rotation, no flags
     FPDFBitmap_Destroy(bitmap);

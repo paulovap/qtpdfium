@@ -12,6 +12,14 @@ QT_BEGIN_NAMESPACE
 class QPdfium;
 class CPDF_Page;
 
+class PageHolder {
+public:
+    CPDF_Page *m_page;
+    int i;
+    PageHolder(CPDF_Page *page);
+    ~PageHolder();
+};
+
 class Q_PDFIUM_EXPORT QPdfiumPage
 {
 public:
@@ -27,9 +35,9 @@ public:
 signals:
 
 private:
-    explicit QPdfiumPage(QSharedPointer<CPDF_Page> page, int index);
+    explicit QPdfiumPage(QSharedPointer<PageHolder> page, int index);
 
-    QSharedPointer<CPDF_Page> m_page;
+    QSharedPointer<PageHolder> m_pageHolder;
     int m_index;
 
     friend class QPdfium;

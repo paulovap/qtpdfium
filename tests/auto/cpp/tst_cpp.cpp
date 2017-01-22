@@ -25,6 +25,7 @@ private slots:
     void cleanupTestCase();
     void init();
     void cleanup();
+    void test_invalidPdf();
     void test_openPdf();
     void test_countPages();
     void test_getPages();
@@ -32,7 +33,6 @@ private slots:
     void test_renderPage();
 private:
     QPdfium *m_pdfium;
-    QString m_filename;
     QTemporaryFile m_file;
 };
 
@@ -40,9 +40,6 @@ private:
 
 void CppTest::initTestCase()
 {
-
-     m_filename = QString(DATA) + "/pdf.pdf";
-     qDebug() << m_filename;
 }
 
 void CppTest::cleanupTestCase()
@@ -55,6 +52,12 @@ void CppTest::init() {
 
 void CppTest::cleanup() {
     delete m_pdfium;
+}
+
+void CppTest::test_invalidPdf()
+{
+    auto status = m_pdfium->loadFile("this_file_is_not_found.pdf");
+    QCOMPARE(status, QPdfium::FILE_ERROR);
 }
 
 void CppTest::test_openPdf()
