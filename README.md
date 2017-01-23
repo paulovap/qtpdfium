@@ -34,8 +34,8 @@ You can access pages by index:
 #include <QtPdfium/QPdfium>
 
 QPdfium pdf("mypdf.pdf");
-QWeakReference<QPdfiumPage> ref =  pdf.page(0);
-qDebug() << ref.data()->width(); // should show something!
+QPdfiumPage page =  pdf.page(0);
+qDebug() << page.width(); // should show something!
 ```
 
 To generate the image:
@@ -44,8 +44,18 @@ To generate the image:
 #include <QtPdfium/QPdfium>
 
 QPdfium pdf("mypdf.pdf");
-QWeakReference<QPdfiumPage> ref =  pdf.page(0);
-QImage image = ref.data()->image(3); //renders it 3 times bigger
+QPdfiumPage page =  pdf.page(0);
+QImage image = page.image(3); //renders it 3 times bigger
+```
+
+And for extracting text:
+
+```cpp
+#include <QtPdfium/QPdfium>
+
+QPdfium pdf("mypdf.pdf");
+QPdfiumPage page =  pdf.page(0);
+QString pageText = page.text();
 ```
 
 Note: On iOS you need to initialize QtPdfium manually since it is statically linked. Just create a global object like this:
@@ -71,4 +81,3 @@ Feel free to help. :)
 
 ### License
 BSD
-
