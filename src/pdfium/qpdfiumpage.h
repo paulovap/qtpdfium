@@ -13,13 +13,15 @@ QT_BEGIN_NAMESPACE
 class QPdfium;
 class CPDF_Page;
 class CPDF_TextPage;
+class CPDF_Document;
 
 class PageHolder {
 public:
+    QWeakPointer<CPDF_Document> m_doc;
     CPDF_Page *m_page;
     CPDF_TextPage *m_textPage;
     int i;
-    PageHolder(CPDF_Page *page);
+    PageHolder(QWeakPointer<CPDF_Document> doc, CPDF_Page *page);
     ~PageHolder();
 };
 

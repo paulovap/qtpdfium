@@ -25,6 +25,7 @@ private slots:
     void cleanupTestCase();
     void init();
     void cleanup();
+    void test_documentDeletion();
     void test_extractText();
     void test_invalidPdf();
     void test_openPdf();
@@ -53,6 +54,18 @@ void CppTest::init() {
 
 void CppTest::cleanup() {
     delete m_pdfium;
+}
+
+void CppTest::test_documentDeletion()
+{
+    auto pdf = new QPdfium(":/data/pdf.pdf");
+    auto page = pdf->page(0);
+    delete pdf;
+    auto image = page.image();
+    auto text = page.text();
+
+    QVERIFY2(image == QImage(), "Image should not be rendered");
+    QVERIFY2(text.size() >0 , "Text should be extracted without a doc");
 }
 
 void CppTest::test_extractText()

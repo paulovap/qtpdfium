@@ -6,8 +6,9 @@
 
 QT_BEGIN_NAMESPACE
 
-PageHolder::PageHolder(CPDF_Page *page)
-    : m_page(page)
+PageHolder::PageHolder(QWeakPointer<CPDF_Document> doc, CPDF_Page *page)
+    : m_doc(doc)
+    , m_page(page)
     , m_textPage(static_cast<CPDF_TextPage*>(FPDFText_LoadPage(page)))
 {
 }
@@ -60,7 +61,7 @@ qreal QPdfiumPage::height() const
 
 bool QPdfiumPage::isValid() const
 {
-    return !m_pageHolder.isNull();
+    return !m_pageHolder.isNull() && !m_pageHolder->m_doc.isNull();
 }
 
 int QPdfiumPage::pageIndex() const
@@ -71,6 +72,12 @@ int QPdfiumPage::pageIndex() const
 QImage QPdfiumPage::image(qreal scale)
 {
     if (!isValid())
+        return QImage();
+
+    //We need to hold the document while generating the image
+    QSharedPointer<CPDF_Document> d = m_pageHolder->m_doc.toStrongRef();
+
+    if (!d)
         return QImage();
 
     QImage image(width()*scale, height()*scale, QImage::Format_RGBA8888);

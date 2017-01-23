@@ -95,7 +95,8 @@ QPdfiumPage QPdfium::page(int i)
 
     auto strongRef = m_pages[i].toStrongRef();
     if (!strongRef)
-        strongRef.reset(new PageHolder(static_cast<CPDF_Page*>
+        strongRef.reset(new PageHolder(m_document.toWeakRef(),
+                                       static_cast<CPDF_Page*>
                                        (FPDF_LoadPage(m_document.data(), i))));
 
     m_pages[i] = strongRef.toWeakRef();
