@@ -1,4 +1,5 @@
 import QtQuick 2.3
+import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.2
 import QtQuick.Dialogs 1.2
 
@@ -27,21 +28,56 @@ ApplicationWindow {
         title:"Open PDF file"
         onAccepted: {
             pdfium.setFilename(fileDialog.fileUrls[0].replace("file://", ""))
-            repeater.model = pdfium.pageCount()
+            pageSelector.model = pdfium.pageCount()
         }
     }
 
-    ListView {
-        id: repeater
-        anchors.fill: parent
-        delegate: delegate
-        spacing: 10
-        Component {
-            id:delegate
-            Image {
-                smooth: true
-                source: "image://pdf/" + index
-            }
+    Text {
+        id: pageSelectorTitle
+        text: "Page:"
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.margins: 10
+    }
+
+    ComboBox {
+        id: pageSelector
+        anchors.leftMargin: 10
+        anchors.verticalCenter: pageSelectorTitle.verticalCenter
+        anchors.left: pageSelectorTitle.right
+        enabled: pdfium.ready
+        model: 0
+        onModelChanged: update()
+
+        onCurrentIndexChanged: update()
+
+        function update() {
+            image.source = ""
+            pdf_text.text = pdfium.pageText(currentIndex)
+            image.source = "image://pdf/" + currentIndex
+        }
+    }
+
+    SplitView {
+        orientation: Qt.Horizontal
+        anchors {
+            top: pageSelector.bottom
+            left: parent.left
+            right:parent.right
+            bottom: parent.bottom
+        }
+
+        Image {
+            id:image
+            width: parent.width/2
+            height: parent.height
+            smooth: true
+        }
+
+        TextArea {
+            id:pdf_text
+            width: parent.width/2
+            height: parent.height
         }
     }
 }
