@@ -1,5 +1,4 @@
 #include "qpdfium.h"
-#include "qpdfiumpage.h"
 #include "../3rdparty/pdfium/public/fpdfview.h"
 #include "../3rdparty/pdfium/core/fpdfapi/parser/cpdf_document.h"
 #include "../3rdparty/pdfium/core/fpdfapi/page/cpdf_page.h"
@@ -50,10 +49,11 @@ QPdfium::Status QPdfium::loadFile(QString filename)
         // Pdfium API enable creating new pdfs, but
         // we are using only for read. So we will
         // return error if file does not exists
-        if (!QFile::exists(filename));
+        if (!QFile::exists(filename))
             return QPdfium::FILE_ERROR;
         return parseError(FPDF_GetLastError());
     }
+    return QPdfium::SUCCESS;
 }
 
 QPdfium::Status QPdfium::parseError(int err) {

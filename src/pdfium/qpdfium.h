@@ -6,11 +6,11 @@
 #include <QWeakPointer>
 #include <QSharedPointer>
 #include <QVector>
+
+#include "qpdfiumpage.h"
 #include "qpdfiumglobal.h"
 
 QT_BEGIN_NAMESPACE
-
-class QPdfiumPage;
 
 class CPDF_Document;
 class CPDF_Page;
@@ -19,6 +19,7 @@ class PageHolder;
 class Q_PDFIUM_EXPORT QPdfium : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(Status)
 public:
 
     enum Status {
@@ -30,16 +31,17 @@ public:
         FILE_NOT_FOUND_ERROR
     };
 
+
     explicit QPdfium(QObject *parent = 0);
     QPdfium(QString filename, QObject *parent = 0);
 
     virtual ~QPdfium();
 
-    Q_INVOKABLE bool isValid() const;
-    Q_INVOKABLE QString filename() const;
-    Q_INVOKABLE int pageCount() const;
-
+    bool isValid() const;
+    QString filename() const;
+    int pageCount() const;
     QPdfiumPage page(int i);
+
 public slots:
     Status loadFile(QString filename);
 

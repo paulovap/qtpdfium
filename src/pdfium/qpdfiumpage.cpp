@@ -1,11 +1,14 @@
 #include "qpdfiumpage.h"
 #include "../3rdparty/pdfium/public/fpdfview.h"
+#include "../3rdparty/pdfium/public/fpdf_text.h"
 #include "../3rdparty/pdfium/core/fpdfapi/page/cpdf_page.h"
+#include "../3rdparty/pdfium/core/fpdftext/cpdf_textpage.h"
 
 QT_BEGIN_NAMESPACE
 
 PageHolder::PageHolder(CPDF_Page *page)
     : m_page(page)
+    , m_textPage(static_cast<CPDF_TextPage*>(FPDFText_LoadPage(page)))
 {
 }
 
@@ -13,6 +16,8 @@ PageHolder::~PageHolder()
 {
     if (m_page)
         FPDF_ClosePage(m_page);
+    if (m_textPage)
+        FPDFText_ClosePage(m_textPage);
 }
 
 QPdfiumPage::QPdfiumPage(QSharedPointer<PageHolder> page, int index)
@@ -36,6 +41,7 @@ QPdfiumPage &QPdfiumPage::operator=(const QPdfiumPage &other)
 
 QPdfiumPage::~QPdfiumPage()
 {
+
 }
 
 qreal QPdfiumPage::width() const
@@ -55,6 +61,11 @@ qreal QPdfiumPage::height() const
 bool QPdfiumPage::isValid() const
 {
     return !m_pageHolder.isNull();
+}
+
+int QPdfiumPage::pageIndex() const
+{
+    return m_index;
 }
 
 QImage QPdfiumPage::image(qreal scale)
@@ -92,6 +103,17 @@ QImage QPdfiumPage::image(qreal scale)
 
     return image;
 
+}
+
+QString QPdfiumPage::text()
+{
+    return text(0, m_pageHolder->m_textPage->CountChars());
+}
+
+QString QPdfiumPage::text(int start, int size)
+{
+    auto text = m_pageHolder->m_textPage->GetPageText(start,size);
+    return QString::fromWCharArray(text.c_str(), size);
 }
 
 QT_END_NAMESPACE

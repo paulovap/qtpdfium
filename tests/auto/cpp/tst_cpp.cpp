@@ -25,6 +25,7 @@ private slots:
     void cleanupTestCase();
     void init();
     void cleanup();
+    void test_extractText();
     void test_invalidPdf();
     void test_openPdf();
     void test_countPages();
@@ -52,6 +53,15 @@ void CppTest::init() {
 
 void CppTest::cleanup() {
     delete m_pdfium;
+}
+
+void CppTest::test_extractText()
+{
+    auto page = m_pdfium->page(0);
+    auto text = page.text();
+    auto text2 = page.text(0, 1);
+    QVERIFY2(text.size() > 0, "Text was not extracted");
+    QVERIFY2(text2.size() > 0, "Text was not extracted");
 }
 
 void CppTest::test_invalidPdf()
