@@ -24,7 +24,6 @@ QPdfium::QPdfium(QString filename, QObject *parent)
 QPdfium::~QPdfium() {
     m_pages.clear();
     m_document.clear();
-    m_document = nullptr;
 }
 
 bool QPdfium::isValid() const
