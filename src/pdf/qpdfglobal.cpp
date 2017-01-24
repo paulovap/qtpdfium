@@ -1,15 +1,15 @@
 
 #include <QtCore>
 #include <QString>
-#include "qpdfiumglobal.h"
+#include "qpdfglobal.h"
 #include "../3rdparty/pdfium/public/fpdfview.h"
 QT_BEGIN_NAMESPACE
 
 bool initialized = false;
 
-const static PdfiumGlobal instance = PdfiumGlobal();
+const static PdfGlobal instance = PdfGlobal();
 
-void PdfiumGlobal::initPdfium()
+void PdfGlobal::initPdf()
 {
     if (!initialized) {
         FPDF_InitLibrary();
@@ -17,7 +17,7 @@ void PdfiumGlobal::initPdfium()
     }
 }
 
-void PdfiumGlobal::shutdownPdfium()
+void PdfGlobal::shutdownPdf()
 {
     if (initialized) {
         FPDF_DestroyLibrary();
@@ -26,14 +26,14 @@ void PdfiumGlobal::shutdownPdfium()
 }
 
 
-PdfiumGlobal::PdfiumGlobal()
+PdfGlobal::PdfGlobal()
 {
-    initPdfium();
+    initPdf();
 }
 
-PdfiumGlobal::~PdfiumGlobal()
+PdfGlobal::~PdfGlobal()
 {
-    shutdownPdfium();
+    shutdownPdf();
 }
 
 QT_END_NAMESPACE

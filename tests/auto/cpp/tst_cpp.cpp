@@ -1,7 +1,7 @@
 #include <QtTest/QtTest>
 
-#include <QtPdfium/QPdfium>
-#include <QtPdfium/QPdfiumPage>
+#include <QtPdf/QPdf>
+#include <QtPdf/QPdfPage>
 #include <QDebug>
 #include <QScopedPointer>
 #include <QtNetwork/QNetworkAccessManager>
@@ -11,7 +11,7 @@
 
 #ifdef Q_OS_IOS
     //Since it's static library on IOS we need to initialize it by hand
-    PdfiumGlobal global;
+    PdfGlobal global;
 #endif
 
 class CppTest: public QObject
@@ -35,7 +35,7 @@ private slots:
     void test_pageSize();
     void test_renderPage();
 private:
-    QPdfium *m_pdfium;
+    QPdf *m_pdf;
     QTemporaryFile m_file;
 };
 
@@ -50,24 +50,24 @@ void CppTest::cleanupTestCase()
 }
 
 void CppTest::init() {
-    m_pdfium  = new QPdfium(":/data/pdf.pdf");
+    m_pdf  = new QPdf(":/data/pdf.pdf");
 }
 
 void CppTest::cleanup() {
-    delete m_pdfium;
+    delete m_pdf;
 }
 
 void CppTest::test_protectedPdf()
 {
     // passwords can be ignored
-    QCOMPARE(m_pdfium->loadFile(":/data/pdf.pdf", "nopass"), QPdfium::SUCCESS);
-    QCOMPARE(m_pdfium->loadFile(":/data/password_test.pdf"), QPdfium::PASSWORD_ERROR);
-    QCOMPARE(m_pdfium->loadFile(":/data/password_test.pdf", "test"), QPdfium::SUCCESS);
+    QCOMPARE(m_pdf->loadFile(":/data/pdf.pdf", "nopass"), QPdf::SUCCESS);
+    QCOMPARE(m_pdf->loadFile(":/data/password_test.pdf"), QPdf::PASSWORD_ERROR);
+    QCOMPARE(m_pdf->loadFile(":/data/password_test.pdf", "test"), QPdf::SUCCESS);
 }
 
 void CppTest::test_documentDeletion()
 {
-    auto pdf = new QPdfium(":/data/pdf.pdf");
+    auto pdf = new QPdf(":/data/pdf.pdf");
     auto page = pdf->page(0);
     delete pdf;
     auto image = page.image();
@@ -79,7 +79,7 @@ void CppTest::test_documentDeletion()
 
 void CppTest::test_extractText()
 {
-    auto page = m_pdfium->page(0);
+    auto page = m_pdf->page(0);
     auto text = page.text();
     auto text2 = page.text(0, 1);
     QVERIFY2(text.size() > 0, "Text was not extracted");
@@ -88,32 +88,32 @@ void CppTest::test_extractText()
 
 void CppTest::test_invalidPdf()
 {
-    auto status = m_pdfium->loadFile("this_file_is_not_found.pdf");
-    QCOMPARE(status, QPdfium::FILE_NOT_FOUND_ERROR);
+    auto status = m_pdf->loadFile("this_file_is_not_found.pdf");
+    QCOMPARE(status, QPdf::FILE_NOT_FOUND_ERROR);
 }
 
 void CppTest::test_openPdf()
 {
-    QCOMPARE(m_pdfium->isValid(), true);
+    QCOMPARE(m_pdf->isValid(), true);
 }
 
 void CppTest::test_countPages()
 {
-    QCOMPARE(m_pdfium->pageCount(), 36);
+    QCOMPARE(m_pdf->pageCount(), 36);
 }
 
 void CppTest::test_getPages()
 {
-    for (int i=0;i < m_pdfium->pageCount(); i++){
-        Q_ASSERT(m_pdfium->page(i).isValid());
+    for (int i=0;i < m_pdf->pageCount(); i++){
+        Q_ASSERT(m_pdf->page(i).isValid());
     }
 }
 
 void CppTest::test_pageSize()
 {
-    for (int i=0;i < m_pdfium->pageCount(); i++){
-        QPdfiumPage p1 = m_pdfium->page(i);
-        QPdfiumPage p2 = m_pdfium->page(i);
+    for (int i=0;i < m_pdf->pageCount(); i++){
+        QPdfPage p1 = m_pdf->page(i);
+        QPdfPage p2 = m_pdf->page(i);
         auto p3 = p2;
         QCOMPARE(p1.width(), 612.f);
         QCOMPARE(p3.height(), 792.f);
@@ -123,8 +123,8 @@ void CppTest::test_pageSize()
 void CppTest::test_renderPage()
 {
     QString temp = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
-    for (int i=0; i<m_pdfium->pageCount(); i++) {
-        QImage image = m_pdfium->page(i).image(3);
+    for (int i=0; i<m_pdf->pageCount(); i++) {
+        QImage image = m_pdf->page(i).image(3);
         Q_ASSERT(!image.isNull());
         QString saveName(temp + QString("/test%1.jpg").arg(i));
         Q_ASSERT(image.save(saveName, "jpg", 50));

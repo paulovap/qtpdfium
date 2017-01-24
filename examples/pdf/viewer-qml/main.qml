@@ -27,8 +27,8 @@ ApplicationWindow {
         id:fileDialog
         title:"Open PDF file"
         onAccepted: {
-            pdfium.setFilename(fileDialog.fileUrls[0].replace("file://", ""))
-            pageSelector.model = pdfium.pageCount()
+            pdf.setFilename(fileDialog.fileUrls[0].replace("file://", ""))
+            pageSelector.model = pdf.pageCount()
         }
     }
 
@@ -45,7 +45,7 @@ ApplicationWindow {
         anchors.leftMargin: 10
         anchors.verticalCenter: pageSelectorTitle.verticalCenter
         anchors.left: pageSelectorTitle.right
-        enabled: pdfium.ready
+        enabled: pdf.ready
         model: 0
         onModelChanged: update()
 
@@ -53,7 +53,7 @@ ApplicationWindow {
 
         function update() {
             image.source = ""
-            pdf_text.text = pdfium.pageText(currentIndex)
+            pdf_text.text = pdf.pageText(currentIndex)
             image.source = "image://pdf/" + currentIndex
         }
     }

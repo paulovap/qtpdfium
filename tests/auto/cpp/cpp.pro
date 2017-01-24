@@ -1,10 +1,10 @@
 TARGET = tst_cpp
 
-QT += core concurrent pdfium testlib network
+QT += core concurrent pdf testlib network
 CONFIG += testcase c++11
 
-INCLUDEPATH += ../../src/pdfium
-VPATH += ../../../src/pdfium
+INCLUDEPATH += ../../src/pdf
+VPATH += ../../../src/pdf
 
 SOURCES += \
     tst_cpp.cpp

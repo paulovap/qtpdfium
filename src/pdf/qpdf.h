@@ -1,5 +1,5 @@
-#ifndef QPDFIUM_H
-#define QPDFIUM_H
+#ifndef QPDF_H
+#define QPDF_H
 
 #include <QObject>
 #include <QMap>
@@ -7,8 +7,8 @@
 #include <QSharedPointer>
 #include <QVector>
 
-#include "qpdfiumpage.h"
-#include "qpdfiumglobal.h"
+#include "qpdfpage.h"
+#include "qpdfglobal.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -16,7 +16,7 @@ class CPDF_Document;
 class CPDF_Page;
 class PageHolder;
 
-class Q_PDFIUM_EXPORT QPdfium
+class Q_PDF_EXPORT QPdf
 {
 
 public:
@@ -31,31 +31,31 @@ public:
     };
 
 
-    explicit QPdfium();
-    QPdfium(QString filename, QString password = QString());
+    explicit QPdf();
+    QPdf(QString filename, QString password = QString());
 
-    virtual ~QPdfium();
+    virtual ~QPdf();
 
     bool isValid() const;
     QString filename() const;
     int pageCount() const;
     Status status() const;
-    QPdfiumPage page(int i);
+    QPdfPage page(int i);
 
 public slots:
     Status loadFile(QString filename, QString password = QString());
 
 private:
-    Q_DISABLE_COPY(QPdfium)
+    Q_DISABLE_COPY(QPdf)
 
     QSharedPointer<CPDF_Document> m_document;
     QVector<QWeakPointer<PageHolder>> m_pages;
     QString m_filename;
     int m_pageCount;
     Status m_status;
-    QPdfium::Status parseError(int err);
+    QPdf::Status parseError(int err);
 };
 
 QT_END_NAMESPACE
 
-#endif // QPDFIUM_H
+#endif // QPDF_H

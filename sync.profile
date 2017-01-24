@@ -1,5 +1,5 @@
 %modules = ( # path to module name map
-    "QtPdfium" => "$basedir/src/pdfium",
+    "QtPdf" => "$basedir/src/pdf",
 );
 %moduleheaders = ( # restrict the module headers to those found in relative path
 );

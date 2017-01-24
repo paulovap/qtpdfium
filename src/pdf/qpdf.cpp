@@ -1,4 +1,4 @@
-#include "qpdfium.h"
+#include "qpdf.h"
 #include "../3rdparty/pdfium/public/fpdfview.h"
 #include "../3rdparty/pdfium/core/fpdfapi/parser/cpdf_document.h"
 #include "../3rdparty/pdfium/core/fpdfapi/page/cpdf_page.h"
@@ -6,14 +6,14 @@
 
 QT_BEGIN_NAMESPACE
 
-QPdfium::QPdfium()
+QPdf::QPdf()
     : m_document(nullptr)
     , m_pageCount(0)
     , m_status(NOT_LOADED)
 {
 }
 
-QPdfium::QPdfium(QString filename, QString password)
+QPdf::QPdf(QString filename, QString password)
     : m_document(nullptr)
     , m_pageCount(0)
     , m_status(NOT_LOADED)
@@ -21,17 +21,17 @@ QPdfium::QPdfium(QString filename, QString password)
     loadFile(filename, password);
 }
 
-QPdfium::~QPdfium() {
+QPdf::~QPdf() {
     m_pages.clear();
     m_document.clear();
 }
 
-bool QPdfium::isValid() const
+bool QPdf::isValid() const
 {
     return m_document != NULL;
 }
 
-QPdfium::Status QPdfium::loadFile(QString filename, QString password)
+QPdf::Status QPdf::loadFile(QString filename, QString password)
 {
     m_filename = filename;
 
@@ -61,45 +61,45 @@ QPdfium::Status QPdfium::loadFile(QString filename, QString password)
     return m_status;
 }
 
-QPdfium::Status QPdfium::parseError(int err) {
-    QPdfium::Status err_code = QPdfium::SUCCESS;
+QPdf::Status QPdf::parseError(int err) {
+    QPdf::Status err_code = QPdf::SUCCESS;
     // Translate FPDFAPI error code to FPDFVIEW error code
     switch (err) {
     case FPDF_ERR_SUCCESS:
-        err_code = QPdfium::SUCCESS;
+        err_code = QPdf::SUCCESS;
         break;
     case FPDF_ERR_FILE:
-        err_code = QPdfium::FILE_ERROR;
+        err_code = QPdf::FILE_ERROR;
         break;
     case FPDF_ERR_FORMAT:
-        err_code = QPdfium::FORMAT_ERROR;
+        err_code = QPdf::FORMAT_ERROR;
         break;
     case FPDF_ERR_PASSWORD:
-        err_code = QPdfium::PASSWORD_ERROR;
+        err_code = QPdf::PASSWORD_ERROR;
         break;
     case FPDF_ERR_SECURITY:
-        err_code = QPdfium::HANDLER_ERROR;
+        err_code = QPdf::HANDLER_ERROR;
         break;
     }
     return err_code;
 }
 
-QString QPdfium::filename() const
+QString QPdf::filename() const
 {
     return m_filename;
 }
 
-int QPdfium::pageCount() const
+int QPdf::pageCount() const
 {
     return m_pageCount;
 }
 
-QPdfium::Status QPdfium::status() const
+QPdf::Status QPdf::status() const
 {
     return m_status;
 }
 
-QPdfiumPage QPdfium::page(int i)
+QPdfPage QPdf::page(int i)
 {
     Q_ASSERT( i < m_pageCount && i >=0 );
 
@@ -110,7 +110,7 @@ QPdfiumPage QPdfium::page(int i)
                                        (FPDF_LoadPage(m_document.data(), i))));
 
     m_pages[i] = strongRef.toWeakRef();
-    return QPdfiumPage(strongRef, i);
+    return QPdfPage(strongRef, i);
 }
 
 QT_END_NAMESPACE

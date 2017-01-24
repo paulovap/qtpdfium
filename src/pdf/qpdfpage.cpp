@@ -1,4 +1,4 @@
-#include "qpdfiumpage.h"
+#include "qpdfpage.h"
 #include "../3rdparty/pdfium/public/fpdfview.h"
 #include "../3rdparty/pdfium/public/fpdf_text.h"
 #include "../3rdparty/pdfium/core/fpdfapi/page/cpdf_page.h"
@@ -21,55 +21,55 @@ PageHolder::~PageHolder()
         FPDFText_ClosePage(m_textPage);
 }
 
-QPdfiumPage::QPdfiumPage(QSharedPointer<PageHolder> page, int index)
+QPdfPage::QPdfPage(QSharedPointer<PageHolder> page, int index)
     : m_pageHolder(page)
     , m_index(index)
 {
 }
 
-QPdfiumPage::QPdfiumPage(const QPdfiumPage &other)
+QPdfPage::QPdfPage(const QPdfPage &other)
     : m_pageHolder(other.m_pageHolder)
     , m_index(other.m_index)
 {
 }
 
-QPdfiumPage &QPdfiumPage::operator=(const QPdfiumPage &other)
+QPdfPage &QPdfPage::operator=(const QPdfPage &other)
 {
     m_pageHolder = other.m_pageHolder;
     m_index = other.m_index;
     return *this;
 }
 
-QPdfiumPage::~QPdfiumPage()
+QPdfPage::~QPdfPage()
 {
 
 }
 
-qreal QPdfiumPage::width() const
+qreal QPdfPage::width() const
 {
     if (!m_pageHolder)
         return -1;
     return m_pageHolder.data()->m_page->GetPageWidth();
 }
 
-qreal QPdfiumPage::height() const
+qreal QPdfPage::height() const
 {
     if (!m_pageHolder)
         return -1;
     return m_pageHolder.data()->m_page->GetPageHeight();
 }
 
-bool QPdfiumPage::isValid() const
+bool QPdfPage::isValid() const
 {
     return !m_pageHolder.isNull() && !m_pageHolder->m_doc.isNull();
 }
 
-int QPdfiumPage::pageIndex() const
+int QPdfPage::pageIndex() const
 {
     return m_index;
 }
 
-QImage QPdfiumPage::image(qreal scale)
+QImage QPdfPage::image(qreal scale)
 {
     if (!isValid())
         return QImage();
@@ -112,12 +112,12 @@ QImage QPdfiumPage::image(qreal scale)
 
 }
 
-QString QPdfiumPage::text()
+QString QPdfPage::text()
 {
     return text(0, m_pageHolder->m_textPage->CountChars());
 }
 
-QString QPdfiumPage::text(int start, int size)
+QString QPdfPage::text(int start, int size)
 {
     auto text = m_pageHolder->m_textPage->GetPageText(start,size);
     return QString::fromWCharArray(text.c_str(), size);

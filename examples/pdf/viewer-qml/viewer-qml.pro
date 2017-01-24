@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = pdf_reader
-QT += concurrent qml quick pdfium
+QT += concurrent qml quick pdf
 CONFIG += c++11
 
 macx: CONFIG+=app_bundle
@@ -10,7 +10,7 @@ RESOURCES += qml.qrc
 SOURCES += \
     main.cpp
 
-target.path = $$[QT_INSTALL_EXAMPLES]/pdfium/viewer-qml
+target.path = $$[QT_INSTALL_EXAMPLES]/pdf/viewer-qml
 INSTALLS += target
 
 

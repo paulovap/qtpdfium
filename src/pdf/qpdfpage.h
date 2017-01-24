@@ -1,16 +1,16 @@
-#ifndef QPDFIUMPAGE_H
-#define QPDFIUMPAGE_H
+#ifndef QPDFPAGE_H
+#define QPDFPAGE_H
 
 #include <QObject>
 #include <QImage>
 #include <QSharedPointer>
 
-#include "qpdfiumglobal.h"
+#include "qpdfglobal.h"
 
 
 QT_BEGIN_NAMESPACE
 
-class QPdfium;
+class QPdf;
 class CPDF_Page;
 class CPDF_TextPage;
 class CPDF_Document;
@@ -25,12 +25,12 @@ public:
     ~PageHolder();
 };
 
-class Q_PDFIUM_EXPORT QPdfiumPage
+class Q_PDF_EXPORT QPdfPage
 {
 public:
-    QPdfiumPage(const QPdfiumPage &other);
-    QPdfiumPage &operator=(const QPdfiumPage &other);
-    virtual ~QPdfiumPage();
+    QPdfPage(const QPdfPage &other);
+    QPdfPage &operator=(const QPdfPage &other);
+    virtual ~QPdfPage();
 
     qreal width() const;
     qreal height() const;
@@ -43,14 +43,14 @@ public:
     QString text(int start, int size);
 
 private:
-    QPdfiumPage(QSharedPointer<PageHolder> page, int pageIndex);
+    QPdfPage(QSharedPointer<PageHolder> page, int pageIndex);
 
     QSharedPointer<PageHolder> m_pageHolder;
     int m_index;
 
-    friend class QPdfium;
+    friend class QPdf;
 };
 
-#endif // QPDFIUMPAGE_H
+#endif // QPDFPAGE_H
 
 QT_END_NAMESPACE

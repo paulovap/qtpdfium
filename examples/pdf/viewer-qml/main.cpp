@@ -1,6 +1,6 @@
 #include <QGuiApplication>
-#include <QPdfium>
-#include <QPdfiumPage>
+#include <QPdf>
+#include <QPdfPage>
 #include <QQmlApplicationEngine>
 #include <QQuickImageProvider>
 #include <QQmlContext>
@@ -11,10 +11,10 @@ class PdfImageProvider : public QObject, public QQuickImageProvider
     Q_OBJECT
     Q_PROPERTY(bool ready READ ready NOTIFY readyChanged)
 public:
-    QPdfium *m_pdf;
+    QPdf *m_pdf;
     explicit PdfImageProvider()
         : QQuickImageProvider(QQuickImageProvider::Image)
-        , m_pdf(new QPdfium())
+        , m_pdf(new QPdf())
     {
     }
 
@@ -65,14 +65,14 @@ int main(int argc, char *argv[])
 
 #ifdef Q_OS_IOS
     //Since it's static library on IOS we need to initialize it by hand
-    PdfiumGlobal global;
+    PdfGlobal global;
 #endif
 
-    QPdfium pdf;
+    QPdf pdf;
     PdfImageProvider *provider = new PdfImageProvider();
     QQmlApplicationEngine engine;
 
-    engine.rootContext()->setContextProperty("pdfium", provider);
+    engine.rootContext()->setContextProperty("pdf", provider);
     engine.addImageProvider(QLatin1String("pdf"), provider);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
