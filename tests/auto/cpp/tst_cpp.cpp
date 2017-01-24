@@ -28,6 +28,9 @@ private slots:
     void test_protectedPdf();
     void test_documentDeletion();
     void test_extractText();
+    void test_countChars();
+    void test_countRects();
+    void test_extractTextRect();
     void test_invalidPdf();
     void test_openPdf();
     void test_countPages();
@@ -85,6 +88,27 @@ void CppTest::test_extractText()
     QVERIFY2(text.size() > 0, "Text was not extracted");
     QVERIFY2(text2.size() > 0, "Text was not extracted");
 }
+
+void CppTest::test_countChars()
+{
+    auto page = m_pdfium->page(0);
+    QVERIFY2(page.countChars() == 2557, "Invalid number of chars");
+}
+
+void CppTest::test_countRects()
+{
+    auto page = m_pdfium->page(0);
+    QVERIFY2(page.countTextRects() == 43, "Invalid number of text rects");
+    QVERIFY2(page.countTextRects(0, 1) == 1, "Invalid number of text rects");
+}
+
+void CppTest::test_extractTextRect()
+{
+    auto page = m_pdfium->page(0);
+    auto text = page.text(page.getTextRect(1));
+    QVERIFY2(text == "Why Propensity Scores", "Invalid text extracted");
+}
+
 
 void CppTest::test_invalidPdf()
 {

@@ -118,21 +118,23 @@ int QPdfiumPage::countChars() const
     return m_pageHolder->m_textPage->CountChars();
 }
 
-int QPdfiumPage::countRects() const
+int QPdfiumPage::countTextRects() const
 {
-    return countRects(0, countChars());
+    return countTextRects(0, countChars());
 }
 
-int QPdfiumPage::countRects(int start, int charCount) const
+int QPdfiumPage::countTextRects(int start, int charCount) const
 {
     return m_pageHolder->m_textPage->CountRects(start, charCount);
 }
 
-QRectF QPdfiumPage::getRect(int rectIndex) const
+QRectF QPdfiumPage::getTextRect(int rectIndex) const
 {
-    FX_FLOAT left, top, right, bottom;
+    //FIXME
+    FX_FLOAT left = 0, top = 0, right = 0, bottom = 0;
     m_pageHolder->m_textPage->GetRect(rectIndex, left, top, right, bottom);
-    return QRectF(left, top, right - left, top - bottom);
+    auto rects = m_pageHolder->m_textPage->GetRectArray(0, countChars());
+    return QRectF(rects[rectIndex].left, rects[rectIndex].top, rects[rectIndex].right - rects[rectIndex].left, rects[rectIndex].top - rects[rectIndex].bottom);
 }
 
 QString QPdfiumPage::text(const QRectF& rect) const
