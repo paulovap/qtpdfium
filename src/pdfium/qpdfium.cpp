@@ -6,17 +6,15 @@
 
 QT_BEGIN_NAMESPACE
 
-QPdfium::QPdfium(QObject *parent)
-    : QObject(parent)
-    , m_document(nullptr)
+QPdfium::QPdfium()
+    : m_document(nullptr)
     , m_pageCount(0)
     , m_status(NOT_LOADED)
 {
 }
 
-QPdfium::QPdfium(QString filename, QString password, QObject *parent)
-    : QObject(parent)
-    , m_document(nullptr)
+QPdfium::QPdfium(QString filename, QString password)
+    : m_document(nullptr)
     , m_pageCount(0)
     , m_status(NOT_LOADED)
 {

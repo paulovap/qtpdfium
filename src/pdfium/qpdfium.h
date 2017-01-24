@@ -16,12 +16,10 @@ class CPDF_Document;
 class CPDF_Page;
 class PageHolder;
 
-class Q_PDFIUM_EXPORT QPdfium : public QObject
+class Q_PDFIUM_EXPORT QPdfium
 {
-    Q_OBJECT
-    Q_ENUMS(Status)
-public:
 
+public:
     enum Status {
         NOT_LOADED = -1,
         SUCCESS = 0,
@@ -33,8 +31,8 @@ public:
     };
 
 
-    explicit QPdfium(QObject *parent = 0);
-    QPdfium(QString filename, QString password = QString(), QObject *parent = 0);
+    explicit QPdfium();
+    QPdfium(QString filename, QString password = QString());
 
     virtual ~QPdfium();
 
