@@ -4,6 +4,7 @@
 #include "../3rdparty/pdfium/core/fpdfapi/page/cpdf_page.h"
 #include "../3rdparty/pdfium/core/fpdftext/cpdf_textpage.h"
 
+
 QT_BEGIN_NAMESPACE
 
 PageHolder::PageHolder(QWeakPointer<CPDF_Document> doc, CPDF_Page *page)
@@ -59,6 +60,7 @@ qreal QPdfiumPage::height() const
     return m_pageHolder.data()->m_page->GetPageHeight();
 }
 
+
 bool QPdfiumPage::isValid() const
 {
     return !m_pageHolder.isNull() && !m_pageHolder->m_doc.isNull();
@@ -109,18 +111,46 @@ QImage QPdfiumPage::image(qreal scale)
     }
 
     return image;
-
 }
 
-QString QPdfiumPage::text()
+int QPdfiumPage::countChars() const
 {
-    return text(0, m_pageHolder->m_textPage->CountChars());
+    return m_pageHolder->m_textPage->CountChars();
 }
 
-QString QPdfiumPage::text(int start, int size)
+int QPdfiumPage::countRects() const
 {
-    auto text = m_pageHolder->m_textPage->GetPageText(start,size);
-    return QString::fromWCharArray(text.c_str(), size);
+    return countRects(0, countChars());
+}
+
+int QPdfiumPage::countRects(int start, int charCount) const
+{
+    return m_pageHolder->m_textPage->CountRects(start, charCount);
+}
+
+QRectF QPdfiumPage::getRect(int rectIndex) const
+{
+    FX_FLOAT left, top, right, bottom;
+    m_pageHolder->m_textPage->GetRect(rectIndex, left, top, right, bottom);
+    return QRectF(left, top, right - left, top - bottom);
+}
+
+QString QPdfiumPage::text(const QRectF& rect) const
+{
+    CFX_FloatRect fxRect(rect.left(), rect.bottom(), rect.right(), rect.top());
+    auto text = m_pageHolder->m_textPage->GetTextByRect(fxRect);
+    return QString::fromWCharArray(text.c_str(), text.GetLength());
+}
+
+QString QPdfiumPage::text() const
+{
+    return text(0, countChars());
+}
+
+QString QPdfiumPage::text(int start, int charCount) const
+{
+    auto text = m_pageHolder->m_textPage->GetPageText(start, charCount);
+    return QString::fromWCharArray(text.c_str(), charCount);
 }
 
 QT_END_NAMESPACE

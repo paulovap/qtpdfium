@@ -39,8 +39,13 @@ public:
     int pageIndex() const;
     QImage image(qreal scale = 1.0);
 
-    QString text();
-    QString text(int start, int size);
+    int countChars() const;
+    int countRects() const;
+    int countRects(int start, int charCount) const;
+    QRectF getRect(int rectIndex) const;
+    QString text(const QRectF &rect) const;
+    QString text() const;
+    QString text(int start, int charCount) const;
 
 private:
     QPdfiumPage(QSharedPointer<PageHolder> page, int pageIndex);
