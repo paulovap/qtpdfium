@@ -2,7 +2,7 @@
 
 #include <QtPdfium/QPdfium>
 #include <QtPdfium/QPdfiumPage>
-
+#include <QDebug>
 #include <QScopedPointer>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
@@ -25,6 +25,7 @@ private slots:
     void cleanupTestCase();
     void init();
     void cleanup();
+    void test_protectedPdf();
     void test_documentDeletion();
     void test_extractText();
     void test_invalidPdf();
@@ -56,6 +57,14 @@ void CppTest::cleanup() {
     delete m_pdfium;
 }
 
+void CppTest::test_protectedPdf()
+{
+    // passwords can be ignored
+    QCOMPARE(m_pdfium->loadFile(":/data/pdf.pdf", "nopass"), QPdfium::SUCCESS);
+    QCOMPARE(m_pdfium->loadFile(":/data/password_test.pdf"), QPdfium::PASSWORD_ERROR);
+    QCOMPARE(m_pdfium->loadFile(":/data/password_test.pdf", "test"), QPdfium::SUCCESS);
+}
+
 void CppTest::test_documentDeletion()
 {
     auto pdf = new QPdfium(":/data/pdf.pdf");
@@ -80,7 +89,7 @@ void CppTest::test_extractText()
 void CppTest::test_invalidPdf()
 {
     auto status = m_pdfium->loadFile("this_file_is_not_found.pdf");
-    QCOMPARE(status, QPdfium::FILE_ERROR);
+    QCOMPARE(status, QPdfium::FILE_NOT_FOUND_ERROR);
 }
 
 void CppTest::test_openPdf()

@@ -10,15 +10,17 @@ QPdfium::QPdfium(QObject *parent)
     : QObject(parent)
     , m_document(nullptr)
     , m_pageCount(0)
+    , m_status(NOT_LOADED)
 {
 }
 
-QPdfium::QPdfium(QString filename, QObject *parent)
+QPdfium::QPdfium(QString filename, QString password, QObject *parent)
     : QObject(parent)
     , m_document(nullptr)
     , m_pageCount(0)
+    , m_status(NOT_LOADED)
 {
-    loadFile(filename);
+    loadFile(filename, password);
 }
 
 QPdfium::~QPdfium() {
@@ -31,51 +33,57 @@ bool QPdfium::isValid() const
     return m_document != NULL;
 }
 
-QPdfium::Status QPdfium::loadFile(QString filename)
+QPdfium::Status QPdfium::loadFile(QString filename, QString password)
 {
-    if (m_filename != filename) {
-        m_filename = filename;
+    m_filename = filename;
 
-        m_pages.clear();
-        m_document.reset(static_cast<CPDF_Document*>(
-                             FPDF_LoadDocument(m_filename.toUtf8().constData(), NULL)));
+    m_pages.clear();
+    m_document.clear();
 
-        if (m_document){
-            m_pageCount = m_document->GetPageCount();
-            m_pages.resize(m_pageCount);
-        }
-
-        // Pdfium API enable creating new pdfs, but
-        // we are using only for read. So we will
-        // return error if file does not exists
-        if (!QFile::exists(filename))
-            return QPdfium::FILE_ERROR;
-        return parseError(FPDF_GetLastError());
+    // Pdfium API enable creating new pdfs, but
+    // we are using only for read. So we will
+    // return error if file does not exists
+    if (!QFile::exists(filename)) {
+        m_status = FILE_NOT_FOUND_ERROR;
+        return m_status;
     }
-    return QPdfium::SUCCESS;
+
+    void* ptr = FPDF_LoadDocument(m_filename.toUtf8().constData(),
+                                  password.toUtf8().constData());
+    auto doc = static_cast<CPDF_Document*>(ptr);
+
+    m_document.reset(doc);
+    m_status = m_document ? SUCCESS : parseError(FPDF_GetLastError());
+
+    if (m_document){
+        m_pageCount = m_document->GetPageCount();
+        m_pages.resize(m_pageCount);
+    }
+
+    return m_status;
 }
 
 QPdfium::Status QPdfium::parseError(int err) {
-  QPdfium::Status err_code = QPdfium::SUCCESS;
-  // Translate FPDFAPI error code to FPDFVIEW error code
-  switch (err) {
+    QPdfium::Status err_code = QPdfium::SUCCESS;
+    // Translate FPDFAPI error code to FPDFVIEW error code
+    switch (err) {
     case FPDF_ERR_SUCCESS:
-      err_code = QPdfium::SUCCESS;
-      break;
+        err_code = QPdfium::SUCCESS;
+        break;
     case FPDF_ERR_FILE:
-      err_code = QPdfium::FILE_ERROR;
-      break;
+        err_code = QPdfium::FILE_ERROR;
+        break;
     case FPDF_ERR_FORMAT:
-      err_code = QPdfium::FORMAT_ERROR;
-      break;
+        err_code = QPdfium::FORMAT_ERROR;
+        break;
     case FPDF_ERR_PASSWORD:
-      err_code = QPdfium::PASSWORD_ERROR;
-      break;
+        err_code = QPdfium::PASSWORD_ERROR;
+        break;
     case FPDF_ERR_SECURITY:
-      err_code = QPdfium::HANDLER_ERROR;
-      break;
-  }
-  return err_code;
+        err_code = QPdfium::HANDLER_ERROR;
+        break;
+    }
+    return err_code;
 }
 
 QString QPdfium::filename() const
@@ -85,7 +93,12 @@ QString QPdfium::filename() const
 
 int QPdfium::pageCount() const
 {
-        return m_pageCount;
+    return m_pageCount;
+}
+
+QPdfium::Status QPdfium::status() const
+{
+    return m_status;
 }
 
 QPdfiumPage QPdfium::page(int i)

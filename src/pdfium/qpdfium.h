@@ -23,6 +23,7 @@ class Q_PDFIUM_EXPORT QPdfium : public QObject
 public:
 
     enum Status {
+        NOT_LOADED = -1,
         SUCCESS = 0,
         FILE_ERROR,
         FORMAT_ERROR,
@@ -33,17 +34,18 @@ public:
 
 
     explicit QPdfium(QObject *parent = 0);
-    QPdfium(QString filename, QObject *parent = 0);
+    QPdfium(QString filename, QString password = QString(), QObject *parent = 0);
 
     virtual ~QPdfium();
 
     bool isValid() const;
     QString filename() const;
     int pageCount() const;
+    Status status() const;
     QPdfiumPage page(int i);
 
 public slots:
-    Status loadFile(QString filename);
+    Status loadFile(QString filename, QString password = QString());
 
 private:
     Q_DISABLE_COPY(QPdfium)
@@ -52,6 +54,7 @@ private:
     QVector<QWeakPointer<PageHolder>> m_pages;
     QString m_filename;
     int m_pageCount;
+    Status m_status;
     QPdfium::Status parseError(int err);
 };
 
