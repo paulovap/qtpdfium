@@ -118,23 +118,22 @@ int QPdfiumPage::countChars() const
     return m_pageHolder->m_textPage->CountChars();
 }
 
-int QPdfiumPage::countTextRects() const
+std::vector<QRectF> QPdfiumPage::getTextRects(int start, int count) const
 {
-    return countTextRects(0, countChars());
-}
-
-int QPdfiumPage::countTextRects(int start, int charCount) const
-{
-    return m_pageHolder->m_textPage->CountRects(start, charCount);
-}
-
-QRectF QPdfiumPage::getTextRect(int rectIndex) const
-{
+    std::vector<QRectF> result;
+    std::vector<CFX_FloatRect> pdfiumRects = m_pageHolder->m_textPage->GetRectArray(start, count);
+    result.reserve(pdfiumRects.size());
+    for (CFX_FloatRect &rect: pdfiumRects) {
+        result.push_back({rect.left, rect.top, rect.right - rect.left, rect.top - rect.bottom});
+    }
+    return result;
+    /*
     //FIXME
     FX_FLOAT left = 0, top = 0, right = 0, bottom = 0;
     m_pageHolder->m_textPage->GetRect(rectIndex, left, top, right, bottom);
     auto rects = m_pageHolder->m_textPage->GetRectArray(0, countChars());
     return QRectF(rects[rectIndex].left, rects[rectIndex].top, rects[rectIndex].right - rects[rectIndex].left, rects[rectIndex].top - rects[rectIndex].bottom);
+    */
 }
 
 QString QPdfiumPage::text(const QRectF& rect) const

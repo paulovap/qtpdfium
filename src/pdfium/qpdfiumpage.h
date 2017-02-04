@@ -40,9 +40,7 @@ public:
     QImage image(qreal scale = 1.0);
 
     int countChars() const;
-    int countTextRects() const;
-    int countTextRects(int start, int charCount) const;
-    QRectF getTextRect(int rectIndex) const;
+    std::vector<QRectF> getTextRects(int start = 0, int charCount = -1) const;
     QString text(const QRectF &rect) const;
     QString text() const;
     QString text(int start, int charCount) const;
