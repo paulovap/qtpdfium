@@ -106,7 +106,7 @@ void CppTest::test_extractTextRect()
 {
     auto page = m_pdfium->page(0);
     auto rects = page.getTextRects();
-    auto text = page.text(rects[1]);
+    auto text = page.text(rects[0]);
     QVERIFY2(text == "Why Propensity Scores", "Invalid text extracted");
 }
 
