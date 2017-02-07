@@ -118,9 +118,9 @@ int QPdfiumPage::countChars() const
     return m_pageHolder->m_textPage->CountChars();
 }
 
-std::vector<QRectF> QPdfiumPage::getTextRects(int start, int count) const
+QVector<QRectF> QPdfiumPage::getTextRects(int start, int count) const
 {
-    std::vector<QRectF> result;
+    QVector<QRectF> result;
     std::vector<CFX_FloatRect> pdfiumRects = m_pageHolder->m_textPage->GetRectArray(start, count);
     result.reserve(pdfiumRects.size());
     for (CFX_FloatRect &rect: pdfiumRects) {
