@@ -2,14 +2,14 @@
 SOURCE_DIR = $$PWD/pdfium
 
 PRIVATE_HEADERS += \
-$$SOURCE_DIR/core/fxge/android/cfpf_skiabufferfont.h \
-$$SOURCE_DIR/core/fxge/android/cfpf_skiadevicemodule.h \
-$$SOURCE_DIR/core/fxge/android/cfpf_skiafilefont.h \
-$$SOURCE_DIR/core/fxge/android/cfpf_skiafont.h \
-$$SOURCE_DIR/core/fxge/android/cfpf_skiafontdescriptor.h \
-$$SOURCE_DIR/core/fxge/android/cfpf_skiafontmgr.h \
-$$SOURCE_DIR/core/fxge/android/cfpf_skiapathfont.h \
-$$SOURCE_DIR/core/fxge/android/cfx_androidfontinfo.h \
+##$$SOURCE_DIR/core/fxge/android/cfpf_skiabufferfont.h \
+##$$SOURCE_DIR/core/fxge/android/cfpf_skiadevicemodule.h \
+##$$SOURCE_DIR/core/fxge/android/cfpf_skiafilefont.h \
+##$$SOURCE_DIR/core/fxge/android/cfpf_skiafont.h \
+##$$SOURCE_DIR/core/fxge/android/cfpf_skiafontdescriptor.h \
+##$$SOURCE_DIR/core/fxge/android/cfpf_skiafontmgr.h \
+##$$SOURCE_DIR/core/fxge/android/cfpf_skiapathfont.h \
+##$$SOURCE_DIR/core/fxge/android/cfx_androidfontinfo.h \
 $$SOURCE_DIR/core/fxge/cfx_facecache.h \
 $$SOURCE_DIR/core/fxge/cfx_fontcache.h \
 $$SOURCE_DIR/core/fxge/cfx_fontmapper.h \
@@ -38,11 +38,11 @@ $$SOURCE_DIR/core/fxge/agg/fx_agg_driver.h \
 $$SOURCE_DIR/core/fxge/win32/cfx_windowsdib.h
 
 SOURCES += \
-$$SOURCE_DIR/core/fxge/android/cfpf_skiadevicemodule.cpp \
-$$SOURCE_DIR/core/fxge/android/cfpf_skiafont.cpp \
-$$SOURCE_DIR/core/fxge/android/cfpf_skiafontmgr.cpp \
-$$SOURCE_DIR/core/fxge/android/cfx_androidfontinfo.cpp \
-# $$SOURCE_DIR/core/fxge/android/fx_android_imp.cpp \
+##$$SOURCE_DIR/core/fxge/android/cfpf_skiadevicemodule.cpp \
+##$$SOURCE_DIR/core/fxge/android/cfpf_skiafont.cpp \
+##$$SOURCE_DIR/core/fxge/android/cfpf_skiafontmgr.cpp \
+##$$SOURCE_DIR/core/fxge/android/cfx_androidfontinfo.cpp \
+##$$SOURCE_DIR/core/fxge/android/fx_android_imp.cpp \
 $$SOURCE_DIR/core/fxge/dib/fx_dib_composite.cpp \
 $$SOURCE_DIR/core/fxge/dib/fx_dib_convert.cpp \
 $$SOURCE_DIR/core/fxge/dib/fx_dib_engine.cpp \
