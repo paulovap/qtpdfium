@@ -1,4 +1,4 @@
 [submodule "src/3rdparty/pdfium"]
 	path = src/3rdparty/pdfium
-	url = https://github.com/pinaraf/pdfium.git
+	url = https://github.com/agrogoth/pdfium.git
 	branch = qt

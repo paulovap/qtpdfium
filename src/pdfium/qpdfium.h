@@ -12,9 +12,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class CPDF_Document;
-class CPDF_Page;
-class PageHolder;
+class QPdfiumPrivate;
 
 class Q_PDFIUM_EXPORT QPdfium
 {
@@ -48,12 +46,7 @@ public slots:
 private:
     Q_DISABLE_COPY(QPdfium)
 
-    QSharedPointer<CPDF_Document> m_document;
-    QVector<QWeakPointer<PageHolder>> m_pages;
-    QString m_filename;
-    int m_pageCount;
-    Status m_status;
-    QPdfium::Status parseError(int err);
+    QScopedPointer<QPdfiumPrivate> d;
 };
 
 QT_END_NAMESPACE

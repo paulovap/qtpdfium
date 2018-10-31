@@ -11,17 +11,17 @@
 QT_BEGIN_NAMESPACE
 
 class QPdfium;
-class CPDF_Page;
-class CPDF_TextPage;
-class CPDF_Document;
+struct fpdf_page_t__;
+struct fpdf_textpage_t__;
+struct fpdf_document_t__;
 
 class PageHolder {
 public:
-    QWeakPointer<CPDF_Document> m_doc;
-    CPDF_Page *m_page;
-    CPDF_TextPage *m_textPage;
-    int i;
-    PageHolder(QWeakPointer<CPDF_Document> doc, CPDF_Page *page);
+    QWeakPointer<fpdf_document_t__> m_doc;
+    fpdf_page_t__ *m_page;
+    fpdf_textpage_t__ *m_textPage;
+    int index;
+    PageHolder(QWeakPointer<fpdf_document_t__> doc, fpdf_page_t__ *page);
     ~PageHolder();
 };
 
@@ -49,7 +49,6 @@ private:
     QPdfiumPage(QSharedPointer<PageHolder> page, int pageIndex);
 
     QSharedPointer<PageHolder> m_pageHolder;
-    int m_index;
 
     friend class QPdfium;
 };
