@@ -42,7 +42,7 @@ public:
     Status status() const;
     QPdfiumPage page(int i);
 
-public slots:
+public Q_SLOTS:
     Status loadFile(QString filename, QString password = QString());
 
 private:

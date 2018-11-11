@@ -49,13 +49,13 @@ public:
 
     Q_INVOKABLE void setFilename(QString filename) {
         m_pdf->loadFile(filename);
-        emit readyChanged(m_pdf->isValid());
+        Q_EMIT readyChanged(m_pdf->isValid());
     }
 
     Q_INVOKABLE QString pageText(int index) {
         return m_pdf && m_pdf->isValid() ? m_pdf->page(index).text() : "";
     }
-signals:
+Q_SIGNALS:
     void readyChanged(int);
 };
 

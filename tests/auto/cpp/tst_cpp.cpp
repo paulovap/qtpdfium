@@ -20,7 +20,7 @@ class CppTest: public QObject
 public:
     CppTest() {
     }
-private slots:
+private Q_SLOTS:
     void initTestCase();
     void cleanupTestCase();
     void init();
