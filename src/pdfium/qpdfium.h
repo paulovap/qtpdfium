@@ -44,6 +44,7 @@ public:
 
 public Q_SLOTS:
     Status loadFile(QString filename, QString password = QString());
+    Status loadFile(const QByteArray &data, QString password = QString());
 
 private:
     Q_DISABLE_COPY(QPdfium)
@@ -53,6 +54,7 @@ private:
     QString m_filename;
     int m_pageCount;
     Status m_status;
+    QByteArray m_data;
     QPdfium::Status parseError(int err);
 };
 
