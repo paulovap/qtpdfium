@@ -11,6 +11,7 @@ QPdfium::QPdfium()
     , m_pageCount(0)
     , m_status(NOT_LOADED)
 {
+    FPDF_InitLibrary();
 }
 
 QPdfium::QPdfium(QString filename, QString password)
@@ -18,10 +19,12 @@ QPdfium::QPdfium(QString filename, QString password)
     , m_pageCount(0)
     , m_status(NOT_LOADED)
 {
+    FPDF_InitLibrary();
     loadFile(filename, password);
 }
 
 QPdfium::~QPdfium() {
+    FPDF_DestroyLibrary();
     m_pages.clear();
     m_document.clear();
 }
