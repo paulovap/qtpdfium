@@ -61,6 +61,26 @@ QPdfium::Status QPdfium::loadFile(QString filename, QString password)
     return m_status;
 }
 
+QPdfium::Status QPdfium::loadFile(const QByteArray &data, QString password) {
+    m_data = data;
+
+    m_pages.clear();
+    m_document.clear();
+
+    void *ptr = FPDF_LoadMemDocument(m_data.constData(), m_data.size(), password.toUtf8().constData());
+    auto doc = static_cast<CPDF_Document *>(ptr);
+
+    m_document.reset(doc);
+    m_status = m_document ? SUCCESS : parseError(FPDF_GetLastError());
+
+    if (m_document) {
+        m_pageCount = m_document->GetPageCount();
+        m_pages.resize(m_pageCount);
+    }
+
+    return m_status;
+}
+
 QPdfium::Status QPdfium::parseError(int err) {
     QPdfium::Status err_code = QPdfium::SUCCESS;
     // Translate FPDFAPI error code to FPDFVIEW error code
