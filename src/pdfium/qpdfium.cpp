@@ -86,7 +86,7 @@ QPdfium::Status QPdfium::loadFile(QString filename, QString password)
     }
 
     d->document.reset(FPDF_LoadDocument(filename.toUtf8().constData(),
-                                        password.toUtf8().constData()));
+                                        password.toUtf8().constData()), QPdfiumPrivate::deleteDocument);
 
     d->status = d->document ? SUCCESS : d->parseError(FPDF_GetLastError());
 
